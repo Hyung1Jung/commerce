@@ -1,0 +1,13 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: commerce-eureka
+
+eureka:
+  instance:
+    hostname: ${EUREKA_HOST}
+  client:
+    fetch-registry: false
+    register-with-eureka: false
