@@ -5,6 +5,8 @@ on:
     branches:
       - 'feature/*'
       - 'develop'
+  workflow_dispatch:
+  
   pull_request:
     branches:
       - 'feature/*'
@@ -15,24 +17,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-    
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Set up JDK 17
         uses: actions/setup-java@v1
         with:
           java-version: 17
 
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
+        shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew build
+        shell: bash
         
-      - name: Build with Gradle
-        run: ./gradlew test
-        
-      - name: Publish Unit Test Results
-        uses: Commerce/publish-unit-test-result-action@v1
-        if: ${{ always() }}
-        with:
-          files: build/test-results/**/*.xml
