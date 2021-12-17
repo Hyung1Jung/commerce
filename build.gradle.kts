@@ -98,8 +98,8 @@ project(":user") {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.security:spring-security-core:5.6.0")
         implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.security:spring-security-core:5.6.0")
 
         testImplementation("io.mockk:mockk:1.12.0")
         testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
@@ -109,6 +109,31 @@ project(":user") {
 
         implementation("org.flywaydb:flyway-mysql:8.2.1")
         runtimeOnly("mysql:mysql-connector-java")
+
+        implementation(project(":core"))
+
+    }
+}
+
+project(":auth") {
+    dependencies {
+
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+
+        implementation ("org.springframework.boot:spring-boot-starter-security:2.5.4")
+
+        implementation ("io.jsonwebtoken:jjwt:0.9.1")
+
+        implementation("org.flywaydb:flyway-mysql:8.2.1")
+        runtimeOnly("mysql:mysql-connector-java")
+
+        testImplementation("io.mockk:mockk:1.12.0")
+        testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
+        testImplementation("io.kotest:kotest-assertions-core:5.0.2")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.springframework.security:spring-security-test")
 
         implementation(project(":core"))
 
