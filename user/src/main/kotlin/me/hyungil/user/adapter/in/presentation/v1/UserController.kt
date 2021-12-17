@@ -1,5 +1,6 @@
 package me.hyungil.user.adapter.`in`.presentation.v1
 
+import me.hyungil.user.application.user.port.`in`.GetUserResponse
 import me.hyungil.user.application.user.port.`in`.UserSignUpRequest
 import me.hyungil.user.application.user.port.`in`.UserUseCase
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
@@ -12,5 +13,6 @@ class UserController(
     private val userUseCase: UserUseCase
 ) {
     @PostMapping
-    fun createUser(@RequestBody createUserSignUpRequest: UserSignUpRequest) = userUseCase.createUser(createUserSignUpRequest)
+    fun createUser(@RequestBody createUserSignUpRequest: UserSignUpRequest) =
+        GetUserResponse(userUseCase.createUser(createUserSignUpRequest))
 }

@@ -101,6 +101,10 @@ project(":user") {
         implementation("org.springframework.security:spring-security-core:5.6.0")
         implementation("org.springframework.boot:spring-boot-starter-validation")
 
+        testImplementation("io.mockk:mockk:1.12.0")
+        testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
+        testImplementation("io.kotest:kotest-assertions-core:5.0.2")
+
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
 
         implementation("org.flywaydb:flyway-mysql:8.2.1")

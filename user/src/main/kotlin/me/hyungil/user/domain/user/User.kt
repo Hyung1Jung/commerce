@@ -2,7 +2,7 @@ package me.hyungil.user.domain.user
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import java.util.*
+import java.time.LocalDateTime
 
 class User(
 
@@ -11,6 +11,10 @@ class User(
     val email: String,
 
     private val password: String,
+
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+
+    val updatedAt: LocalDateTime? = null,
 
     val roles: Set<String> = hashSetOf()
 
