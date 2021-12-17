@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: commerce-user
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/user?autoReconnect=true&serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: false
+    show-sql: true
+    database: mysql
+  flyway:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/user?autoReconnect=true&serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
+    sql-migration-suffixes: sql
+    baseline-on-migrate: true
+    baseline-version: 0
+    encoding: UTF-8
+    locations: classpath:/db/migration

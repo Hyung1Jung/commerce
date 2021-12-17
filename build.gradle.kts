@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.0"
     kotlin("plugin.spring") version "1.6.0"
+    kotlin("plugin.jpa") version "1.6.0"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -32,18 +33,31 @@ subprojects {
     apply(plugin = "kotlin-kapt")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
-
+    apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
+    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 
     configurations {
         compileOnly {
             extendsFrom(configurations.annotationProcessor.get())
         }
+
     }
 
     repositories {
         mavenCentral()
+    }
+
+    noArg {
+        annotation("javax.persistence.Entity")
+        annotation("javax.persistence.MappedSuperclass")
+        annotation("javax.persistence.Embeddable")
+    }
+
+    allOpen {
+        annotation("javax.persistence.Entity")
+        annotation("javax.persistence.MappedSuperclass")
+        annotation("javax.persistence.Embeddable")
     }
 
     dependencies {
@@ -73,8 +87,37 @@ project(":eureka") {
     }
 }
 
+project(":core") {
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    }
+}
+
+project(":user") {
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.security:spring-security-core:5.6.0")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+
+        testImplementation("io.mockk:mockk:1.12.0")
+        testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
+        testImplementation("io.kotest:kotest-assertions-core:5.0.2")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
+
+        implementation("org.flywaydb:flyway-mysql:8.2.1")
+        runtimeOnly("mysql:mysql-connector-java")
+
+        implementation(project(":core"))
+
+    }
+}
+
 tasks {
     bootJar {
         enabled = false
     }
 }
+
