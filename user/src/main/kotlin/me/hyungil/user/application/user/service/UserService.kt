@@ -8,15 +8,13 @@ import me.hyungil.user.application.user.port.`in`.UserRequest
 import me.hyungil.user.application.user.port.`in`.UserUseCase
 import me.hyungil.user.application.user.port.out.UserPort
 import me.hyungil.user.domain.user.User
-import org.springframework.context.annotation.Bean
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 
 @Service
 class UserService(
-    private val userAdapter: UserPort,
+    private val userAdapter: UserPort
 ) : UserUseCase {
 
     override fun createUser(userCreateRequest: UserRequest): User {
@@ -42,7 +40,7 @@ class UserService(
 
     private fun duplicationEmailCheck(email: String) {
 
-        if (userAdapter.findByEmail(email) != null) throw ConflictRequestException()
+        userAdapter.findByEmail(email)?.let { throw ConflictRequestException() }
     }
 
     private fun findByEmail(email: String) = userAdapter.findByEmail(email) ?: throw NotFoundRequestException()
