@@ -9,5 +9,5 @@ class UserAdapter(private val userRepository: UserRepository): UserPort {
 
     override fun save(user: User) = userRepository.save(UserEntity(user)).toUserDomain()
 
-    override fun existsByEmail(email: String) = userRepository.existsByEmail(email)
+    override fun findByEmail(email: String) = userRepository.findByEmail(email)?.toUserDomain()
 }

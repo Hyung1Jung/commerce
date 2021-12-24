@@ -3,6 +3,7 @@ package me.hyungil.core.error.handler
 import me.hyungil.core.error.dto.ErrorResponse
 import me.hyungil.core.error.exception.ConflictRequestException
 import me.hyungil.core.error.exception.NotFoundRequestException
+import me.hyungil.core.error.exception.UnauthorizedAccessRequestException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -25,5 +26,10 @@ interface GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundRequestException::class)
     fun handleNotFoundException(exception: NotFoundRequestException) =
+        exception.message?.let { ErrorResponse.of(it) }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnauthorizedAccessRequestException::class)
+    fun handlerUnauthorizedAccessRequestException(exception: UnauthorizedAccessRequestException) =
         exception.message?.let { ErrorResponse.of(it) }
 }

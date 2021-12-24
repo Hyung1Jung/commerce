@@ -110,8 +110,9 @@ project(":user") {
         implementation("org.flywaydb:flyway-mysql:8.2.1")
         runtimeOnly("mysql:mysql-connector-java")
 
-        implementation(project(":core"))
+        implementation("io.jsonwebtoken:jjwt:0.9.1")
 
+        implementation(project(":core"))
     }
 }
 
@@ -122,12 +123,17 @@ project(":auth") {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-validation")
 
-        implementation ("org.springframework.boot:spring-boot-starter-security:2.5.4")
+        implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
 
-        implementation ("io.jsonwebtoken:jjwt:0.9.1")
+        implementation("io.jsonwebtoken:jjwt:0.9.1")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.0.6")
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
 
         implementation("org.flywaydb:flyway-mysql:8.2.1")
         runtimeOnly("mysql:mysql-connector-java")
+
+        implementation("com.google.code.gson:gson:2.8.9")
 
         testImplementation("io.mockk:mockk:1.12.0")
         testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
