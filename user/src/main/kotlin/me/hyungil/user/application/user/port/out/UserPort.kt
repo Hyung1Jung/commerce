@@ -4,7 +4,7 @@ import me.hyungil.user.domain.user.User
 
 interface UserPort {
 
-    fun save(user: User) : User
+    fun save(user: User): User
 
-    fun existsByEmail(email: String) : Boolean
+    fun findByEmail(email: String): User?
 }

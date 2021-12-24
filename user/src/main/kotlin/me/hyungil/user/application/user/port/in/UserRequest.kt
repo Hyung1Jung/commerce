@@ -7,7 +7,7 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
-data class UserSignUpRequest(
+data class UserRequest(
 
     @field:Email(message = "올바른 이메일 주소를 입력해주세요.")
     @field:NotBlank(message = "이메일은 필수 입력 입니다.")

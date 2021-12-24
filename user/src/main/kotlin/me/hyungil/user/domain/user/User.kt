@@ -14,7 +14,7 @@ class User(
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-    val updatedAt: LocalDateTime? = null,
+    var updatedAt: LocalDateTime? = null,
 
     val roles: Set<String> = hashSetOf()
 

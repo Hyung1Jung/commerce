@@ -1,7 +1,10 @@
 package me.hyungil.user.application.user.service
 
 import me.hyungil.core.error.exception.ConflictRequestException
-import me.hyungil.user.application.user.port.`in`.UserSignUpRequest
+import me.hyungil.core.error.exception.NotFoundRequestException
+import me.hyungil.core.error.exception.UnauthorizedAccessRequestException
+import me.hyungil.user.application.user.port.`in`.LoginRequest
+import me.hyungil.user.application.user.port.`in`.UserRequest
 import me.hyungil.user.application.user.port.`in`.UserUseCase
 import me.hyungil.user.application.user.port.out.UserPort
 import me.hyungil.user.domain.user.User
@@ -10,17 +13,36 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class UserService(private val userAdapter: UserPort) : UserUseCase {
+class UserService(
+    private val userAdapter: UserPort
+) : UserUseCase {
 
-    override fun createUser(userSignUpRequest: UserSignUpRequest): User {
+    override fun createUser(userCreateRequest: UserRequest): User {
 
-        conflictRequestCheck(userSignUpRequest.email)
+        duplicationEmailCheck(userCreateRequest.email)
 
-        return userAdapter.save(userSignUpRequest.toUserDomain(BCryptPasswordEncoder().encode(userSignUpRequest.password)))
+        return userAdapter.save(userCreateRequest.toUserDomain(BCryptPasswordEncoder().encode(userCreateRequest.password)))
     }
 
-    private fun conflictRequestCheck(request: String) {
+    override fun login(loginRequest: LoginRequest): User {
 
-        if (userAdapter.existsByEmail(request)) throw ConflictRequestException()
+        val user = findByEmail(loginRequest.email)
+
+        inValidPasswordCheck(loginRequest.password, user.password)
+
+        return user
     }
+
+    private fun inValidPasswordCheck(userLoginPassword: String, userPassword: String) {
+
+        if (!BCryptPasswordEncoder().matches(userLoginPassword, userPassword)) throw UnauthorizedAccessRequestException()
+    }
+
+    private fun duplicationEmailCheck(email: String) {
+
+        userAdapter.findByEmail(email)?.let { throw ConflictRequestException() }
+    }
+
+    private fun findByEmail(email: String) = userAdapter.findByEmail(email) ?: throw NotFoundRequestException()
+
 }

@@ -25,5 +25,4 @@ class UserEntity(
     constructor(user: User) : this(user.id, user.email, user.password, user.roles)
 
     fun toUserDomain() = User(id, email, password, createdAt, updatedAt, roles)
-
 }
