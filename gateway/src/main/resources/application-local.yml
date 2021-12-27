@@ -1,0 +1,17 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: commerce-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: commerce-user
+          uri: ${USER_DEFAULT_URL}
+          predicates:
+            - Path=/v1/users/**
+        - id: commerce-auth
+          uri: ${AUTH_DEFAULT_URL}
+          predicates:
+            - Path=/v1/auth/**

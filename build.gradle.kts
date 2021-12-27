@@ -77,6 +77,7 @@ extra["springCloudVersion"] = "2020.0.4"
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.RELEASE")
     }
 }
 
@@ -142,7 +143,21 @@ project(":auth") {
         testImplementation("org.springframework.security:spring-security-test")
 
         implementation(project(":core"))
+    }
+}
 
+project(":gateway") {
+    dependencies {
+
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
+        implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-gateway:3.0.6")
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("io.projectreactor:reactor-test")
     }
 }
 
