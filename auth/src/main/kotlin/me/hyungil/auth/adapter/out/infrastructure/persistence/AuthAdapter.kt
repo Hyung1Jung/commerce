@@ -10,4 +10,6 @@ class AuthAdapter(private val refreshTokenRepository: RefreshTokenRepository) : 
     override fun save(refreshToken: RefreshToken) {
         refreshTokenRepository.save(RefreshTokenEntity(refreshToken)).toRefreshTokenDomain()
     }
+
+    override fun findBySecretKey(id: Long) = refreshTokenRepository.findBySecretKey(id)?.toRefreshTokenDomain()
 }
