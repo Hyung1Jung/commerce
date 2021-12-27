@@ -21,4 +21,7 @@ class UserController(
 
     @PostMapping("login")
     fun login(@RequestBody loginRequest: LoginRequest) = userUseCase.login(loginRequest)?.let { GetUserResponse(it) }
+
+    @GetMapping("{id}")
+    fun getUserInfo(@PathVariable id: Long) = userUseCase.getUserInfo(id)?.let { GetUserResponse(it) }
 }

@@ -33,7 +33,7 @@ class SecurityConfiguration(private val jwtProvider: JwtProvider) : WebSecurityC
 
             .and()
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST,  "/v1/auth/login").permitAll()
+            .antMatchers(HttpMethod.POST,  "/v1/auth/login", "/v1/auth/reissue").permitAll()
             .anyRequest().hasRole("USER")
 
             .and()

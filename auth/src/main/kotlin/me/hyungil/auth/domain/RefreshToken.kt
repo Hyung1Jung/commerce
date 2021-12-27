@@ -13,4 +13,9 @@ class RefreshToken(
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     var updatedAt: LocalDateTime? = null
-)
+) {
+    fun updateToken(token: String): RefreshToken {
+        this.token = token
+        return this
+    }
+}

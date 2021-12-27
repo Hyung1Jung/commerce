@@ -2,8 +2,7 @@ package me.hyungil.auth.application.auth.port.`in`
 
 data class TokenRequest(
 
-    val accessToke: String,
+    val accessToken: String,
 
     val refreshToken: String
-
 )

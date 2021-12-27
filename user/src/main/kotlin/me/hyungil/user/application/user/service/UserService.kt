@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class UserService(
-    private val userAdapter: UserPort
-) : UserUseCase {
+class UserService(private val userAdapter: UserPort) : UserUseCase {
 
     override fun createUser(userCreateRequest: UserRequest): User {
 
@@ -33,6 +31,8 @@ class UserService(
         return user
     }
 
+    override fun getUserInfo(id: Long) = findById(id)
+
     private fun inValidPasswordCheck(userLoginPassword: String, userPassword: String) {
 
         if (!BCryptPasswordEncoder().matches(userLoginPassword, userPassword)) throw UnauthorizedAccessRequestException()
@@ -45,4 +45,5 @@ class UserService(
 
     private fun findByEmail(email: String) = userAdapter.findByEmail(email) ?: throw NotFoundRequestException()
 
+    private fun findById(id: Long) = userAdapter.findByIdOrNull(id) ?: throw NotFoundRequestException()
 }

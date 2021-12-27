@@ -7,4 +7,6 @@ interface UserUseCase {
     fun createUser(userCreateRequest: UserRequest): User
 
     fun login(loginRequest: LoginRequest): User?
+
+    fun getUserInfo(id: Long): User?
 }

@@ -8,4 +8,3 @@ data class GetUserResponse(
 
     val roles: Set<String>
 )
-
