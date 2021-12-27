@@ -4,5 +4,6 @@ include(
     "eureka",
     "core",
     "user",
-    "auth"
+    "auth",
+    "gateway"
 )
