@@ -1,12 +1,12 @@
 server:
-  port: 8888
+  port: 8084
 
 spring:
   application:
-    name: commerce-auth
+    name: commerce-product
 
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/auth?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/product?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,7 +17,7 @@ spring:
     show-sql: true
     database: mysql
   flyway:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/auth?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/product?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
     user: ${DB_USER}
     password: ${DB_PASSWORD}
     sql-migration-suffixes: sql
@@ -25,9 +25,6 @@ spring:
     baseline-version: 0
     encoding: UTF-8
     locations: classpath:/db/migration
-
-  jwt:
-    secret: ${SECRET_KEY}
 
 eureka:
   client:
@@ -37,7 +34,3 @@ eureka:
       defaultZone: ${EUREKA_URL}
   instance:
     hostname: ${EUREKA_HOST}
-
-feign:
-  commerce-user:
-    url: http://localhost:8081/v1/users

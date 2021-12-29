@@ -161,6 +161,30 @@ project(":gateway") {
     }
 }
 
+project(":product") {
+    dependencies {
+
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("com.fasterxml.jackson.core:jackson-core:2.13.1")
+
+        implementation("org.springframework.kafka:spring-kafka:2.8.1")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
+
+        implementation("org.flywaydb:flyway-mysql:8.2.1")
+        runtimeOnly("mysql:mysql-connector-java")
+
+        testImplementation("io.mockk:mockk:1.12.0")
+        testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
+        testImplementation("io.kotest:kotest-assertions-core:5.0.2")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+        implementation(project(":core"))
+    }
+}
+
 tasks {
     bootJar {
         enabled = false

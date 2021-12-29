@@ -29,6 +29,7 @@ class JwtAuthenticationFilter(private val jwtProvider: JwtProvider) : GenericFil
             val authentication: Authentication = jwtProvider.getAuthentication(token)
 
             SecurityContextHolder.getContext().authentication = authentication
+
         }
 
         filterChain.doFilter(request, response)

@@ -15,3 +15,9 @@ spring:
           uri: ${AUTH_DEFAULT_URL}
           predicates:
             - Path=/v1/auth/**
+        - id: commerce-product
+          uri: ${PRODUCT_DEFAULT_URL}
+          predicates:
+            - Path=/v1/products/**
+          filters:
+            - RemoveRequestHeader=Cookie

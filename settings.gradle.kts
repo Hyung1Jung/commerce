@@ -5,5 +5,6 @@ include(
     "core",
     "user",
     "auth",
-    "gateway"
+    "gateway",
+    "product"
 )
