@@ -5,6 +5,9 @@ spring:
   application:
     name: commerce-order
 
+  kafka:
+    bootstrap_servers_config: ${BOOTSTRAP_SERVERS_CONFIG}
+
   datasource:
     url: jdbc:mysql://${DB_HOST}:${DB_PORT}/order_item?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
     username: ${DB_USER}

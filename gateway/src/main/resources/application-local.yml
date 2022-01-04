@@ -22,8 +22,8 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
         - id: commerce-order
-          uri: ${PRODUCT_DEFAULT_URL}
+          uri: ${ORDER_DEFAULT_URL}
           predicates:
-            - Path=/v1/order/**
+            - Path=/v1/orders/**
           filters:
             - RemoveRequestHeader=Cookie

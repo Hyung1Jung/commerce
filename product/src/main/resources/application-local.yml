@@ -5,6 +5,10 @@ spring:
   application:
     name: commerce-product
 
+  kafka:
+    bootstrap_servers_config: ${BOOTSTRAP_SERVERS_CONFIG}
+    group_id_config: ${GROUP_ID_CONFIG}
+
   datasource:
     url: jdbc:mysql://${DB_HOST}:${DB_PORT}/product?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
     username: ${DB_USER}

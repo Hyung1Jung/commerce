@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import me.hyungil.product.application.product.port.`in`.KafkaUseCase
 import me.hyungil.product.application.product.port.out.ProductPort
+import me.hyungil.product.commom.property.KafkaProperties
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Service

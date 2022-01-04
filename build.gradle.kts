@@ -173,6 +173,8 @@ project(":product") {
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
 
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
         implementation("org.flywaydb:flyway-mysql:8.2.1")
         runtimeOnly("mysql:mysql-connector-java")
 
@@ -194,6 +196,8 @@ project(":order") {
         implementation("org.springframework.kafka:spring-kafka:2.8.1")
 
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
+
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
         implementation("org.flywaydb:flyway-mysql:8.2.1")
         runtimeOnly("mysql:mysql-connector-java")
