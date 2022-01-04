@@ -19,7 +19,7 @@ data class GetOrderResponse(
         productId = order.productId,
         quantity = order.quantity,
         unitPrice = order.unitPrice,
-        totalPrice = order.totalPrice,
+        totalPrice = order.quantity * order.unitPrice,
         orderId = order.orderId
     )
 }

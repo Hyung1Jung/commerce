@@ -33,13 +33,13 @@ class OrderEntity(
 ) : BaseLongIdEntity(id) {
 
     constructor(order: Order) : this(
-        order.id,
-        order.productId,
-        order.quantity,
-        order.unitPrice,
-        order.userId,
-        order.totalPrice,
-        order.orderId
+        id = order.id,
+        productId = order.productId,
+        quantity = order.quantity,
+        unitPrice = order.unitPrice,
+        totalPrice = order.quantity * order.unitPrice,
+        userId = order.userId,
+        orderId = order.orderId
     )
 
     fun toOrderDomain() = Order(id, productId, quantity, unitPrice, totalPrice, userId, orderId)
