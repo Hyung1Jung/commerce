@@ -5,7 +5,9 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import me.hyungil.product.application.product.port.`in`.KafkaUseCase
 import me.hyungil.product.application.product.port.out.ProductPort
+import me.hyungil.product.commom.property.KafkaProperties
 import org.slf4j.LoggerFactory
+import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Service
 
 
@@ -16,6 +18,7 @@ class KafkaConsumer(private val productAdapter: ProductPort) : KafkaUseCase {
         private val log = LoggerFactory.getLogger(KafkaConsumer::class.java)
     }
 
+    @KafkaListener(topics = ["order-product-topic"])
     override fun updateQty(kafkaMessage: String) {
 
         log.info("Kafka Message: ->$kafkaMessage")
@@ -32,8 +35,7 @@ class KafkaConsumer(private val productAdapter: ProductPort) : KafkaUseCase {
         val product = productAdapter.findByProductId(map["productId"] as String)
 
         if (product != null) {
-
-            product.updateStock(map["qty"] as Int)
+            product.updateStock(map["quantity"] as Int)
             productAdapter.save(product)
         }
     }

@@ -1,16 +1,15 @@
 server:
-  port: 8084
+  port: 8082
 
 spring:
   application:
-    name: commerce-product
+    name: commerce-order
 
   kafka:
     bootstrap_servers_config: ${BOOTSTRAP_SERVERS_CONFIG}
-    group_id_config: ${GROUP_ID_CONFIG}
 
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/product?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/order_item?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,7 +20,7 @@ spring:
     show-sql: true
     database: mysql
   flyway:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/product?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/order_item?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
     user: ${DB_USER}
     password: ${DB_PASSWORD}
     sql-migration-suffixes: sql

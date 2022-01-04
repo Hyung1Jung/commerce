@@ -6,5 +6,6 @@ include(
     "user",
     "auth",
     "gateway",
-    "product"
+    "product",
+    "order"
 )
