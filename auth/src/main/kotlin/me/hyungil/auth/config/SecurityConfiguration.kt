@@ -25,15 +25,21 @@ class SecurityConfiguration(private val jwtProvider: JwtProvider) : WebSecurityC
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
-            .cors().and()
+            .cors()
+
+            .and()
+
             .csrf().disable()
+            .formLogin().disable()
+            .httpBasic().disable()
 
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
             .and()
+
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST,  "/v1/auth/login", "/v1/auth/reissue").permitAll()
+            .antMatchers(HttpMethod.POST,  "/v1/auth/**").permitAll()
             .anyRequest().hasRole("USER")
 
             .and()
