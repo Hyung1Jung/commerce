@@ -3,6 +3,7 @@ package me.hyungil.auth.config
 import io.jsonwebtoken.*
 import io.jsonwebtoken.impl.Base64UrlCodec
 import me.hyungil.auth.application.auth.port.`in`.GetTokenResponse
+import me.hyungil.auth.domain.CustomUser
 import me.hyungil.core.error.exception.UnauthorizedAccessRequestException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 import javax.annotation.PostConstruct
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 @Component
 class JwtProvider(
@@ -21,6 +23,8 @@ class JwtProvider(
     @Value("spring.jwt.secret")
     private var secretKey: String,
     private val userDetailsService: UserDetailsService,
+    private val response: HttpServletResponse
+
 ) {
     private val ROLES: String = "roles"
     private val accessTokenValidMillisecond: Long = 60 * 60 * 1000L
@@ -35,10 +39,11 @@ class JwtProvider(
         secretKey = Base64UrlCodec.BASE64URL.encode(secretKey.toByteArray(StandardCharsets.UTF_8))
     }
 
-    fun createTokenDto(userPk: Long, roles: Set<String>): GetTokenResponse {
+    fun createTokenDto(userPk: Long, roles: Set<String>, email: String): GetTokenResponse {
 
         val claims = Jwts.claims().setSubject(userPk.toString())
         claims[ROLES] = roles
+        claims["email"] = email
 
         val now = Date()
 
@@ -58,7 +63,7 @@ class JwtProvider(
 
         return GetTokenResponse(
             grantType = "Bearer",
-            accessToken = accessToken,
+            accessToken = "Bearer $accessToken",
             refreshToken = refreshToken,
             accessTokenExpireDate = accessTokenValidMillisecond
         )
