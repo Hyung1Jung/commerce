@@ -153,8 +153,15 @@ project(":gateway") {
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
+        implementation("javax.xml.bind:jaxb-api:2.3.1")
+        implementation("io.jsonwebtoken:jjwt:0.9.1")
+        implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+
+        implementation("org.springframework.security:spring-security-core:5.6.0")
+
         implementation("org.springframework.cloud:spring-cloud-starter-gateway:3.0.6")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
+        implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.0.6")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.projectreactor:reactor-test")

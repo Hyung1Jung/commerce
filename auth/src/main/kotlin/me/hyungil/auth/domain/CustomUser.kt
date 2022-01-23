@@ -28,4 +28,6 @@ class CustomUser(
     override fun isCredentialsNonExpired() = true
 
     override fun isEnabled() = true
+
+    fun getEmail() = email
 }

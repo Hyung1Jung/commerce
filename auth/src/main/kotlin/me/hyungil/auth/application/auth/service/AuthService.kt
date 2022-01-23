@@ -22,7 +22,7 @@ class AuthService(
 
         val user = Gson().fromJson(getLoginUser(loginRequest), GetUserResponse::class.java)
 
-        val getTokenResponse = jwtProvider.createTokenDto(user.id, user.roles)
+        val getTokenResponse = jwtProvider.createTokenDto(user.id, user.roles, user.email)
 
         val refreshToken = RefreshToken(secretKey = user.id, token = getTokenResponse.refreshToken)
 
@@ -45,7 +45,7 @@ class AuthService(
 
         if (refreshToken.token != tokenRequest.refreshToken) throw UnauthorizedAccessRequestException("리프레시 토큰이 일치하지 않습니다.")
 
-        val newCreatedToken = jwtProvider.createTokenDto(user.id, user.roles)
+        val newCreatedToken = jwtProvider.createTokenDto(user.id, user.roles, user.email)
         val updateRefreshToken = refreshToken.updateToken(newCreatedToken.refreshToken)
 
         authAdapter.save(updateRefreshToken)
