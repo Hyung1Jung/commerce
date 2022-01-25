@@ -8,6 +8,8 @@ data class GetProductResponse(
 
     val productId: String,
 
+    val email: String,
+
     val productName: String,
 
     val unitPrice: Long,
@@ -22,6 +24,7 @@ data class GetProductResponse(
     constructor(product: Product) : this(
         id = product.id,
         productId = product.productId,
+        email = product.email,
         productName = product.productName,
         unitPrice = product.unitPrice,
         stock = product.stock,

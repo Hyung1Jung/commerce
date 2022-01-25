@@ -14,6 +14,6 @@ class OrderApi(
 
     @PostMapping("{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createOrder(@PathVariable userId: Long, @RequestBody orderRequest: OrderRequest) =
-        GetOrderResponse(orderUseCase.createOrder(userId, orderRequest))
+    fun createOrder(@PathVariable userId: Long, @RequestBody orderRequest: OrderRequest, @RequestHeader("email") email: String) =
+        GetOrderResponse(orderUseCase.createOrder(userId, orderRequest, email))
 }

@@ -16,6 +16,9 @@ class ProductEntity(
     val productId: String,
 
     @Column(nullable = false)
+    val email: String,
+
+    @Column(nullable = false)
     val productName: String,
 
     @Column(nullable = false)
@@ -29,10 +32,11 @@ class ProductEntity(
     constructor(product: Product) : this(
         product.id,
         product.productId,
+        product.email,
         product.productName,
         product.unitPrice,
         product.stock,
     )
 
-    fun toProductDomain() = Product(id, productId, productName, unitPrice, stock, createdAt, updatedAt)
+    fun toProductDomain() = Product(id, productId, email, productName, unitPrice, stock, createdAt, updatedAt)
 }

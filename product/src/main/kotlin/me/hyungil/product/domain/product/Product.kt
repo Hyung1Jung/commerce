@@ -8,6 +8,8 @@ class Product(
 
     val productId: String,
 
+    val email: String,
+
     val productName: String,
 
     val unitPrice: Long,

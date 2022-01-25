@@ -1,0 +1,1 @@
+ALTER TABLE order_item ADD email VARCHAR(45) NOT NULL;

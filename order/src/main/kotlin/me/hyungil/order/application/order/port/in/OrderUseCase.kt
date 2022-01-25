@@ -4,5 +4,5 @@ import me.hyungil.order.domain.order.Order
 
 interface OrderUseCase {
 
-    fun createOrder(userId: Long, orderRequest: OrderRequest): Order
+    fun createOrder(userId: Long, orderRequest: OrderRequest, email: String): Order
 }

@@ -16,6 +16,6 @@ data class ProductRequest(
     val stock: Long
 ) {
 
-    fun toProductDomain() =
-        Product(productId = productId, productName = productName, unitPrice = unitPrice, stock = stock)
+    fun toProductDomain(email: String) =
+        Product(productId = productId, email = email, productName = productName, unitPrice = unitPrice, stock = stock)
 }
