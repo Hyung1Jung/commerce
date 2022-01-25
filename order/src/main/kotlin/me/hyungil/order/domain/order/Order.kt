@@ -6,6 +6,8 @@ class Order(
 
     val id: Long = 0,
 
+    val email: String,
+
     val productId: String,
 
     val quantity: Long,

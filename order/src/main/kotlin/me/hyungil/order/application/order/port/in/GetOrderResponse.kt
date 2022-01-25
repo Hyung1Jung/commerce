@@ -4,6 +4,8 @@ import me.hyungil.order.domain.order.Order
 
 data class GetOrderResponse(
 
+    val email: String,
+
     val productId: String,
 
     val quantity: Long,
@@ -16,6 +18,7 @@ data class GetOrderResponse(
 ) {
 
     constructor(order: Order) : this(
+        email = order.email,
         productId = order.productId,
         quantity = order.quantity,
         unitPrice = order.unitPrice,

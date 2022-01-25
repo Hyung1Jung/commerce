@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service
 @Service
 class ProductService(private val productAdapter: ProductPort) : ProductUseCase {
 
-    override fun createProduct(productRequest: ProductRequest) = productAdapter.save(productRequest.toProductDomain())
+    override fun createProduct(productRequest: ProductRequest, email: String) =
+        productAdapter.save(productRequest.toProductDomain(email))
 
     override fun getProducts() = productAdapter.findAll()
 }

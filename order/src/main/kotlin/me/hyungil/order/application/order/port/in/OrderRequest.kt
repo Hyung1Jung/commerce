@@ -13,8 +13,9 @@ data class OrderRequest(
     val unitPrice: Long
 ) {
 
-    fun toOrderDomain(userId: Long) =
+    fun toOrderDomain(userId: Long, email: String) =
         Order(
+            email = email,
             productId = productId,
             quantity = quantity,
             unitPrice = unitPrice,

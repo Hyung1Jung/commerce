@@ -16,6 +16,9 @@ class OrderEntity(
     val productId: String,
 
     @Column(nullable = false)
+    val email: String,
+
+    @Column(nullable = false)
     val quantity: Long,
 
     @Column(nullable = false)
@@ -35,6 +38,7 @@ class OrderEntity(
     constructor(order: Order) : this(
         id = order.id,
         productId = order.productId,
+        email = order.email,
         quantity = order.quantity,
         unitPrice = order.unitPrice,
         totalPrice = order.quantity * order.unitPrice,
@@ -42,5 +46,14 @@ class OrderEntity(
         orderId = order.orderId
     )
 
-    fun toOrderDomain() = Order(id, productId, quantity, unitPrice, totalPrice, userId, orderId)
+    fun toOrderDomain() = Order(
+        id = id,
+        email = email,
+        productId = productId,
+        quantity = quantity,
+        unitPrice = unitPrice,
+        totalPrice = totalPrice,
+        userId = userId,
+        orderId = orderId
+    )
 }

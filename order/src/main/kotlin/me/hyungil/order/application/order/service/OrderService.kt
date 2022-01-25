@@ -12,10 +12,10 @@ class OrderService(
     private val kafkaProducer: KafkaProducer
 ) : OrderUseCase {
 
-    override fun createOrder(userId: Long, orderRequest: OrderRequest): Order {
+    override fun createOrder(userId: Long, orderRequest: OrderRequest, email: String): Order {
 
         kafkaProducer.send("order-product-topic", orderRequest)
 
-        return orderAdapter.save(orderRequest.toOrderDomain(userId))
+        return orderAdapter.save(orderRequest.toOrderDomain(userId, email))
     }
 }

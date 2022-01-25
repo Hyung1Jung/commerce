@@ -1,0 +1,1 @@
+ALTER TABLE product ADD email VARCHAR(25) NOT NULL;
