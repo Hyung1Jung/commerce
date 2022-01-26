@@ -121,7 +121,6 @@ project(":auth") {
     dependencies {
 
         implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.springframework.boot:spring-boot-starter-validation")
 
         implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
@@ -131,8 +130,6 @@ project(":auth") {
         implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.0.6")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
 
-        implementation("org.flywaydb:flyway-mysql:8.2.1")
-        runtimeOnly("mysql:mysql-connector-java")
         implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
