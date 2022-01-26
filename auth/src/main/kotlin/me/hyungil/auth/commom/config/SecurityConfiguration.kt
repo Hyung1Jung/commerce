@@ -1,4 +1,4 @@
-package me.hyungil.auth.config
+package me.hyungil.auth.commom.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

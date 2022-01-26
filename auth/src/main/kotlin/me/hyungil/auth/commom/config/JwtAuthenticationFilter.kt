@@ -1,4 +1,4 @@
-package me.hyungil.auth.config
+package me.hyungil.auth.commom.config
 
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.Authentication

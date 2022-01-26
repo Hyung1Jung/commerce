@@ -1,9 +1,8 @@
-package me.hyungil.auth.config
+package me.hyungil.auth.commom.config
 
 import io.jsonwebtoken.*
 import io.jsonwebtoken.impl.Base64UrlCodec
 import me.hyungil.auth.application.auth.port.`in`.GetTokenResponse
-import me.hyungil.auth.domain.CustomUser
 import me.hyungil.core.error.exception.UnauthorizedAccessRequestException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -15,15 +14,13 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 import javax.annotation.PostConstruct
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 @Component
 class JwtProvider(
 
     @Value("spring.jwt.secret")
     private var secretKey: String,
-    private val userDetailsService: UserDetailsService,
-    private val response: HttpServletResponse
+    private val userDetailsService: UserDetailsService
 
 ) {
     private val ROLES: String = "roles"

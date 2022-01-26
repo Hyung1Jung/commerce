@@ -16,15 +16,10 @@ spring:
     generate-ddl: false
     show-sql: true
     database: mysql
-  flyway:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/auth?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false
-    user: ${DB_USER}
-    password: ${DB_PASSWORD}
-    sql-migration-suffixes: sql
-    baseline-on-migrate: true
-    baseline-version: 0
-    encoding: UTF-8
-    locations: classpath:/db/migration
+
+  redis:
+    host: localhost
+    port: ${REDIS_PORT}
 
   jwt:
     secret: ${SECRET_KEY}
@@ -41,3 +36,9 @@ eureka:
 feign:
   commerce-user:
     url: http://localhost:8081/v1/users
+
+logging:
+  level:
+    root: debug
+  pattern:
+    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"

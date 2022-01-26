@@ -1,9 +1,11 @@
 # commerce
+MSA, DDD로 설계하는 commerce 서비스
 
-### Archiecture
+# Archiecture
 
-- MSA Archiecture
-![아키텍쳐 drawio](https://user-images.githubusercontent.com/43127088/148683531-e2f8c96e-2b63-47d1-b5e3-06d03bb4feaf.png)
+### MSA Archiecture
+![무제 drawio](https://user-images.githubusercontent.com/43127088/151162260-2401bf24-35e8-49bd-aac1-05e3462eec4e.png)
+
 
 1. user에서 회원가입을 진행합니다.
 2. 한번 로그인 하면 여러 도메인에서 더 이상의 로그인 없이 이용할 수 있도록 SAML의 sso 방식처럼, auth 를 따로 두어 그 곳에서 인증을 하고, 인증에 성공하면 로그인을 진핼합니다.
@@ -16,9 +18,34 @@
 - 각각의 서버 모두 독립된 서비스로 나누었기 떄문에, 각 서비스는 독립된 배포 및 분산되고, 자율적으로 개발되고, 크기가 작고, 기능 중심적이고, 자동화된 프로세스로 구축되고 배포됩니다. 
 - 또한 각각의 MicroService에서 발생하는 장애가 전체 시스템 장애로 확장되지 않습니다.
 
-- DDD -> Hexagonal Architecture(육각형 아키텍쳐) 적용
+
+### DDD -> Hexagonal Architecture(육각형 아키텍쳐)의 구성 
 ![Hexagonal-Simplified](https://user-images.githubusercontent.com/43127088/148683425-420094f0-b965-4571-b3e3-44513111bcef.png)
 
+핵사고날 아키텍쳐 장점
+1. 아키텍처 확장이 용이합니다.
+2. SOLID 원칙을 쉽게 적용할 수 있습니다.
+3. 모듈 일부를 배포하는 게 용이합니다.
+4. 테스트를 위해 모듈을 가짜로 바꿀 수 있으므로 테스트가 더 안정적이고 쉽습니다.
+5. 더 큰 비즈니스적 가치를 갖고 더 오래 지속되는 도메인 모델에 큰 관심을 둡니다.
+
+헥사고날 아키텍처는 내부(도메인)와 외부(인프라)로 구분됩니다.
+
+- 내부 영역 - 순수한 비즈니스 로직을 표현하며 캡슐화된 영역이고 기능적 요구사항에 따라 먼저 설계
+- 외부 영역 - 내부 영역에서 기술을 분리하여 구성한 영역이고 내부 영역 설계 이후 설계
+
+포트와 어댑터 - 포트는 내부 비즈니스 영역을 외부 영역에 노출한 API이고 인바운드(Inbound)/아웃바운드(Outbound) 포트로 구분됩니다.
+
+- 인바운드 포트 - 내부 영역 사용을 위해 노출된 API
+- 아웃바운드 포트 - 내부 영역이 외부 영역을 사용하기 위한 API
+
+어댑터는 외부 세계와 포트 간 교환을 조정하고 역시 인바운드(Inbound)/아웃바운드(Outbound) 어댑터로 구분됩니다.
+
+- 인바운드 어댑터 - 외부 애플리케이션/서비스와 내부 비즈니스 영역(인바운드 포트) 간 데이터 교환을 조정
+- 아웃바운드 어댑터 - 내부 비즈니스 영역(아웃바운드 포트)과 외부 애플리케이션/서비스 간 데이터 교환을 조정
+
+결국 이 구조의 핵심은 비즈니스 로직이 표현 로직이나 데이터 접근 로직에 의존하지 않는 것입니다.
+
 ### use tech 
-- springboot, kotlin, docker, mysql, flyway DB, spring security, kafka, github action CI, Kotest(BDD)
+- springboot, kotlin, docker, mysql, flyway DB, redis, spring security, kafka, zookeeper,  github action CI, Kotest(BDD)
 
