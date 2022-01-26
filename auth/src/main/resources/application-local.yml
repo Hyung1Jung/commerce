@@ -26,6 +26,10 @@ spring:
     encoding: UTF-8
     locations: classpath:/db/migration
 
+  redis:
+    host: localhost
+    port: ${REDIS_PORT}
+
   jwt:
     secret: ${SECRET_KEY}
 
@@ -41,3 +45,9 @@ eureka:
 feign:
   commerce-user:
     url: http://localhost:8081/v1/users
+
+logging:
+  level:
+    root: debug
+  pattern:
+    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"

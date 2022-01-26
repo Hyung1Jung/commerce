@@ -133,6 +133,9 @@ project(":auth") {
 
         implementation("org.flywaydb:flyway-mysql:8.2.1")
         runtimeOnly("mysql:mysql-connector-java")
+        implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
         implementation("com.google.code.gson:gson:2.8.9")
 
