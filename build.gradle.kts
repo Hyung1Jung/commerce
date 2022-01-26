@@ -130,6 +130,7 @@ project(":auth") {
         implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.0.6")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")
 
+        runtimeOnly("mysql:mysql-connector-java")
         implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -217,7 +218,6 @@ project(":order") {
         implementation(project(":core"))
     }
 }
-
 
 tasks {
     bootJar {
