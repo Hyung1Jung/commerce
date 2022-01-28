@@ -4,8 +4,7 @@ MSA, DDD로 설계하는 commerce 서비스
 # Archiecture
 
 ### MSA Archiecture
-![무제 drawio](https://user-images.githubusercontent.com/43127088/151162260-2401bf24-35e8-49bd-aac1-05e3462eec4e.png)
-
+![drawio2 drawio](https://user-images.githubusercontent.com/43127088/151587807-e3a5b2e2-e3c8-433d-a74b-9370c0471b8b.png)
 
 1. user에서 회원가입을 진행합니다.
 2. 한번 로그인 하면 여러 도메인에서 더 이상의 로그인 없이 이용할 수 있도록 SAML의 sso 방식처럼, auth 를 따로 두어 그 곳에서 인증을 하고, 인증에 성공하면 로그인을 진핼합니다.
@@ -18,6 +17,25 @@ MSA, DDD로 설계하는 commerce 서비스
 - 각각의 서버 모두 독립된 서비스로 나누었기 떄문에, 각 서비스는 독립된 배포 및 분산되고, 자율적으로 개발되고, 크기가 작고, 기능 중심적이고, 자동화된 프로세스로 구축되고 배포됩니다. 
 - 또한 각각의 MicroService에서 발생하는 장애가 전체 시스템 장애로 확장되지 않습니다.
 
+데이터 플레인
+- 트래픽을 컨트롤 하는 목적으로 제공하는 영역이고, 데이터 플래인은 Envoy Proxy 를 사용합니다.
+
+Envoy proxy
+- L4, L7 지원, 서버간의 부하 분산량 조절가능합니다.
+- 로드 벨런싱 등 액세스 제어 및 속도제한, 할당량을 지원합니다.
+- Zipkin을 통한 분산트랜젝션 추적 기능 제공합니다.
+- 풍부한 라우팅 규칙, 재시도, 장애 조치등으로 트래픽 동작 제어, 서킷 브래이커등을 제공합니다.
+- http 등 tcp 트래픽에 대한 자동 로드 벨런싱 제공합니다.
+
+컨트롤 플레인
+- 데이터 영역으로 어떤 방식으로 어떠한 트래픽으로 흐르도록 제어하는 영역입니다.
+- 데이터 영역에 대한 컨피그 값을 저장합니다.
+
+Gateway
+- standalone envoy proxy 형태로 istio-ingress-gateway에서 직접적으로 트래픽을 받으며 서비스 메시에 대한 inbound, outbound 트래픽을 관리합니다.
+
+Virtual Service
+- 쿠버네티스 서비스로 라우팅 되게 구성하는 이스티오 오브젝트입니다. 버추얼 서비스가 없는 경우, envoy proxy 는 모든 서비스 인스턴스 간에 라운드로빈 로드 밸런싱을 사용해 트래픽을 분산시킵니다.
 
 ### DDD -> Hexagonal Architecture(육각형 아키텍쳐)의 구성 
 ![Hexagonal-Simplified](https://user-images.githubusercontent.com/43127088/148683425-420094f0-b965-4571-b3e3-44513111bcef.png)
