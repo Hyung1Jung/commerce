@@ -6,8 +6,6 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.mockk.every
 import io.mockk.mockk
-import me.hyungil.auth.application.auth.port.`in`.GetTokenResponse
-import me.hyungil.auth.application.auth.port.`in`.GetUserResponse
 import me.hyungil.auth.application.auth.port.`in`.LoginRequest
 import me.hyungil.auth.application.auth.port.`in`.TokenRequest
 import me.hyungil.auth.commom.config.JwtProvider
