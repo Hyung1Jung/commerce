@@ -1,5 +1,13 @@
 # commerce
-MSA, DDD로 설계하는 commerce 서비스
+MSA, DDD로 설계하는 commerce 서비스입니다.
+
+본 프로젝트는 완성 기한이 정해져있지 않습니다. 꾸준히 달성해가는 성과들을 바탕으로 더 큰 성장과 서비스의 프로젝트를 개선하기 위한 시도를 할 것입니다.
+아직 부족한 부분들이 많은 프로젝트이지만, 점진적으로 꾸준한 개선을 시도하며 좋은 오픈소스가 되었으면 하는 바램입니다.
+
+[각 기능들의 자세한 내용은 이곳을 참고해주시면 감사하겠습니다.](https://github.com/Hyung1Jung/commerce/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A4%91%EC%A0%90-%EC%82%AC%ED%95%AD)
+
+# Event Storming
+![event storming](https://user-images.githubusercontent.com/43127088/152793363-c5322930-7f6c-45a1-bd27-8b5699050f46.png)
 
 # Archiecture
 
@@ -7,7 +15,7 @@ MSA, DDD로 설계하는 commerce 서비스
 ![drawio2 drawio](https://user-images.githubusercontent.com/43127088/151587807-e3a5b2e2-e3c8-433d-a74b-9370c0471b8b.png)
 
 1. user에서 회원가입을 진행합니다.
-2. 한번 로그인 하면 여러 도메인에서 더 이상의 로그인 없이 이용할 수 있도록 SAML의 sso 방식처럼, auth 를 따로 두어 그 곳에서 인증을 하고, 인증에 성공하면 로그인을 진핼합니다.
+2. 한번 로그인 하면 여러 도메인에서 더 이상의 로그인 없이 이용할 수 있도록 sso 방식으로, auth를 따로 두어 그 곳에서 인증을 하고, 인증에 성공하면 로그인을 진행합니다.
 3. 로그인에 성공하면, api gateway에서 토큰을 받아 사용자 정보를 추출하여 header에 삽입합니다.
 4. api gateway에서 만들어진 토큰을 이용해서 product, order의 인가 작업을 진행하고 신뢰할 수 있는 토큰이면 인가에 성공합니다.
 5. 인가에 성공하면, api gateway header에 있는 사용자 정보를 가져와 상품 생성 및 주문 등을 수행합니다.
@@ -65,5 +73,5 @@ Virtual Service
 결국 이 구조의 핵심은 비즈니스 로직이 표현 로직이나 데이터 접근 로직에 의존하지 않는 것입니다.
 
 ### use tech 
-- springboot, kotlin, docker, mysql, flyway DB, redis, spring security, kafka, zookeeper,  github action CI, Kotest(BDD)
+- springboot, kotlin, kotest, docker, mysql, flyway DB, redis, spring security, kafka, zookeeper,  github action CI, Kotest(BDD)
 
