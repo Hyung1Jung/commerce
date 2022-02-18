@@ -4,22 +4,26 @@ server:
 spring:
   application:
     name: commerce-gateway
+
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
       routes:
-
         - id: commerce-auth
           uri: ${AUTH_DEFAULT_URL}
           predicates:
             - Path=/v1/auth/**
+          filters:
+            - CustomAuthFilter
 
         - id: commerce-user
           uri: ${USER_DEFAULT_URL}
           predicates:
             - Path=/v1/users/**
-          filters:
-            - CustomAuthFilter
-            - RewritePath=/v1/products/(?<path>.*),/$\{path}
 
         - id: commerce-product
           uri: ${PRODUCT_DEFAULT_URL}
@@ -27,7 +31,6 @@ spring:
             - Path=/v1/products/**
           filters:
             - CustomAuthFilter
-            - RewritePath=/v1/products/(?<path>.*),/$\{path}
 
         - id: commerce-order
           uri: ${ORDER_DEFAULT_URL}
@@ -35,7 +38,12 @@ spring:
             - Path=/v1/orders/**
           filters:
             - CustomAuthFilter
-            - RewritePath=/v1/products/(?<path>.*),/$\{path}
+
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: defaultCircuitBreaker
+            fallbackUri: forward:/fallback
 
 eureka:
   client:
@@ -46,8 +54,8 @@ eureka:
   instance:
     hostname: ${EUREKA_HOST}
 
-logging:
-  level:
-    root: debug
-  pattern:
-    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+#logging:
+#  level:
+#    root: debug
+#  pattern:
+#    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"

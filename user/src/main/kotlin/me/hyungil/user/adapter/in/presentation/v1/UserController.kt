@@ -14,8 +14,15 @@ class UserController(
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createUser(@RequestBody userCreateRequest: UserRequest) =
-        GetUserResponse(userUseCase.createUser(userCreateRequest))
+    fun createUser(@RequestBody userCreateRequest: UserRequest): GetUserResponse {
+        try {
+            Thread.sleep(5000)
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+        }
+
+        return GetUserResponse(userUseCase.createUser(userCreateRequest))
+    }
 
     @PostMapping("login")
     fun login(@RequestBody loginRequest: LoginRequest) = userUseCase.login(loginRequest)?.let { GetUserResponse(it) }

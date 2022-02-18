@@ -12,7 +12,7 @@ MSA, DDD로 설계하는 commerce 서비스입니다.
 # Archiecture
 
 ### MSA Archiecture
-![drawio2 drawio](https://user-images.githubusercontent.com/43127088/151587807-e3a5b2e2-e3c8-433d-a74b-9370c0471b8b.png)
+![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/43127088/154705526-a2415783-d94e-40ca-b724-7612c476deb6.png)
 
 1. user에서 회원가입을 진행합니다.
 2. 한번 로그인 하면 여러 도메인에서 더 이상의 로그인 없이 이용할 수 있도록 sso 방식으로, auth를 따로 두어 그 곳에서 인증을 하고, 인증에 성공하면 로그인을 진행합니다.
