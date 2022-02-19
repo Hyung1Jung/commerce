@@ -39,6 +39,12 @@ spring:
           filters:
             - CustomAuthFilter
 
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: defaultCircuitBreaker
+            fallbackUri: forward:/fallback
+
 eureka:
   client:
     fetch-registry: true
