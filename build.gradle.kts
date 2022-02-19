@@ -164,7 +164,6 @@ project(":gateway") {
 
         implementation("org.springframework:spring-aop:5.3.15")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
-        implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j:2.0.2")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.projectreactor:reactor-test")
