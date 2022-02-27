@@ -1,16 +1,12 @@
 package me.hyungil.order.adapter.out.infrastructure.persist
 
-import me.hyungil.core.domain.BaseLongIdEntity
+import me.hyungil.order.commom.BaseTimeEntity
 import me.hyungil.order.domain.order.Order
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "order_item")
 class OrderEntity(
-
-    id: Long,
 
     @Column(nullable = false)
     val productId: String,
@@ -31,29 +27,35 @@ class OrderEntity(
     val userId: Long,
 
     @Column(nullable = false)
-    val orderId: String
+    val orderId: String,
 
-) : BaseLongIdEntity(id) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
+) : BaseTimeEntity() {
 
     constructor(order: Order) : this(
-        id = order.id,
-        productId = order.productId,
-        email = order.email,
-        quantity = order.quantity,
-        unitPrice = order.unitPrice,
-        totalPrice = order.quantity * order.unitPrice,
-        userId = order.userId,
-        orderId = order.orderId
+        order.productId,
+        order.email,
+        order.quantity,
+        order.unitPrice,
+        order.quantity * order.unitPrice,
+        order.userId,
+        order.orderId,
+        order.id,
     )
 
     fun toOrderDomain() = Order(
-        id = id,
-        email = email,
-        productId = productId,
-        quantity = quantity,
-        unitPrice = unitPrice,
-        totalPrice = totalPrice,
-        userId = userId,
-        orderId = orderId
+        email,
+        productId,
+        quantity,
+        unitPrice,
+        totalPrice,
+        userId,
+        orderId,
+        createdAt,
+        updatedAt,
+        id
     )
 }

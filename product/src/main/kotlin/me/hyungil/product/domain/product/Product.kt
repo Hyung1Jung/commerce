@@ -4,8 +4,6 @@ import java.time.LocalDateTime
 
 class Product(
 
-    val id: Long = 0,
-
     val productId: String,
 
     val email: String,
@@ -19,6 +17,8 @@ class Product(
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     var updatedAt: LocalDateTime? = null,
+
+    val id: Long ?= null,
 ) {
 
     fun updateStock(qty: Int) {

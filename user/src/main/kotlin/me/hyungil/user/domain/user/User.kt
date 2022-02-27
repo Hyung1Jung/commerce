@@ -6,8 +6,6 @@ import java.time.LocalDateTime
 
 class User(
 
-    val id: Long = 0,
-
     val email: String,
 
     private val password: String,
@@ -16,7 +14,9 @@ class User(
 
     var updatedAt: LocalDateTime? = null,
 
-    val roles: Set<String> = hashSetOf()
+    val roles: Set<String> = hashSetOf(),
+
+    val id: Long? = null
 
 ) : UserDetails {
 

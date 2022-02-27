@@ -1,4 +1,4 @@
-package me.hyungil.core.domain
+package me.hyungil.user.commom
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

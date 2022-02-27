@@ -4,7 +4,6 @@ import me.hyungil.product.domain.product.Product
 import java.time.LocalDateTime
 
 data class GetProductResponse(
-    val id: Long,
 
     val productId: String,
 
@@ -18,17 +17,19 @@ data class GetProductResponse(
 
     val createdAt: LocalDateTime,
 
-    var updatedAt: LocalDateTime?
+    var updatedAt: LocalDateTime?,
+
+    val id: Long?,
 ) {
 
     constructor(product: Product) : this(
-        id = product.id,
-        productId = product.productId,
-        email = product.email,
-        productName = product.productName,
-        unitPrice = product.unitPrice,
-        stock = product.stock,
-        createdAt = product.createdAt,
-        updatedAt = product.updatedAt
+        product.productId,
+        product.email,
+        product.productName,
+        product.unitPrice,
+        product.stock,
+        product.createdAt,
+        product.updatedAt,
+        product.id,
     )
 }

@@ -28,12 +28,12 @@ internal class UserServiceTest : BehaviorSpec() {
             `when`("이미 존재하는 이메일이라면") {
                 every { userAdapter.findByEmail(userRequest.email) } answers {
                     User(
-                        1,
                         userRequest.email,
                         userRequest.password,
                         LocalDateTime.now(),
                         null,
-                        setOf("USER_ROLE")
+                        setOf("USER_ROLE"),
+                        1
                     )
                 }
 
@@ -49,12 +49,12 @@ internal class UserServiceTest : BehaviorSpec() {
 
                 Then("유저 생성에 성공한다") {
                     val user = User(
-                        1,
                         userRequest.email,
                         userRequest.password,
                         LocalDateTime.now(),
                         null,
-                        setOf("USER_ROLE")
+                        setOf("USER_ROLE"),
+                        1
                     )
 
                     every { userAdapter.save(user) } shouldNotBe null
@@ -77,17 +77,17 @@ internal class UserServiceTest : BehaviorSpec() {
 
             `when`("존재하는 사용자라면") {
                 val user = User(
-                    1,
                     loginRequest.email,
                     loginRequest.password,
                     LocalDateTime.now(),
                     null,
-                    setOf("USER_ROLE")
+                    setOf("USER_ROLE"),
+                    1
                 )
                 every { userAdapter.findByEmail(loginRequest.email) } answers { user }
 
                 Then("로그인에 성공한다.") {
-                    every { userService.getUserInfo(user.id) } shouldNotBe null;
+                    every { user.id?.let { userService.getUserInfo(it) } } shouldNotBe null;
                 }
             }
         }
@@ -107,17 +107,17 @@ internal class UserServiceTest : BehaviorSpec() {
 
             `when`("존재하는 사용자라면") {
                 val user = User(
-                    userId,
                     "user@gmail.com",
                     "QWMEN@#(@#KLMSD!@",
                     LocalDateTime.now(),
                     null,
-                    setOf("USER_ROLE")
+                    setOf("USER_ROLE"),
+                    userId
                 )
                 every { userAdapter.findByIdOrNull(userId) } answers { user }
 
                 Then("사용자 정보 조회에 성공한다.") {
-                    every { userService.getUserInfo(user.id) } shouldNotBe null
+                    every { user.id?.let { userService.getUserInfo(it) } } shouldNotBe null
                 }
             }
         }
