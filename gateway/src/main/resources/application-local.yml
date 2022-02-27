@@ -17,8 +17,8 @@ spring:
           uri: ${AUTH_DEFAULT_URL}
           predicates:
             - Path=/v1/auth/**
-          filters:
-            - CustomAuthFilter
+#          filters:
+#            - CustomAuthFilter
 
         - id: commerce-user
           uri: ${USER_DEFAULT_URL}

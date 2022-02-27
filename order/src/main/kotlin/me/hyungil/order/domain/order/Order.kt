@@ -3,9 +3,6 @@ package me.hyungil.order.domain.order
 import java.time.LocalDateTime
 
 class Order(
-
-    val id: Long = 0,
-
     val email: String,
 
     val productId: String,
@@ -23,4 +20,6 @@ class Order(
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     var updatedAt: LocalDateTime? = null,
+
+    val id: Long? = null,
 )

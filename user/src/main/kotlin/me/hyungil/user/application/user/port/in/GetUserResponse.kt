@@ -4,17 +4,16 @@ import me.hyungil.user.domain.user.User
 
 data class GetUserResponse(
 
-    val id: Long,
-
     val email: String,
 
-    val roles: Set<String>
+    val roles: Set<String>,
+
+    val id: Long?
 
 ) {
-
     constructor(user: User) : this(
-        id = user.id,
-        email = user.email,
-        roles = user.roles
+        user.email,
+        user.roles,
+        user.id
     )
 }

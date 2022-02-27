@@ -41,7 +41,6 @@ subprojects {
         compileOnly {
             extendsFrom(configurations.annotationProcessor.get())
         }
-
     }
 
     repositories {
@@ -91,7 +90,6 @@ project(":eureka") {
 project(":core") {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     }
 }
 
@@ -122,6 +120,8 @@ project(":auth") {
 
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-validation")
+
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
         implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
 
@@ -158,6 +158,8 @@ project(":gateway") {
         implementation("io.jsonwebtoken:jjwt-api:0.11.2")
 
         implementation("org.springframework.security:spring-security-core:5.6.0")
+
+        implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j:2.0.2")
 
         implementation("org.springframework.cloud:spring-cloud-starter-gateway:3.0.6")
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4")

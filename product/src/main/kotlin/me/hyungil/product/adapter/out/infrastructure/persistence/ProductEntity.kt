@@ -1,16 +1,12 @@
 package me.hyungil.product.adapter.out.infrastructure.persistence
 
-import me.hyungil.core.domain.BaseLongIdEntity
+import me.hyungil.product.commom.BaseTimeEntity
 import me.hyungil.product.domain.product.Product
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "product")
 class ProductEntity(
-
-    id: Long,
 
     @Column(nullable = false)
     val productId: String,
@@ -25,18 +21,22 @@ class ProductEntity(
     val unitPrice: Long,
 
     @Column(nullable = false)
-    val stock: Long
+    val stock: Long,
 
-) : BaseLongIdEntity(id) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
+) : BaseTimeEntity() {
 
     constructor(product: Product) : this(
-        product.id,
         product.productId,
         product.email,
         product.productName,
         product.unitPrice,
         product.stock,
+        product.id
     )
 
-    fun toProductDomain() = Product(id, productId, email, productName, unitPrice, stock, createdAt, updatedAt)
+    fun toProductDomain() = Product(productId, email, productName, unitPrice, stock, createdAt, updatedAt, id)
 }

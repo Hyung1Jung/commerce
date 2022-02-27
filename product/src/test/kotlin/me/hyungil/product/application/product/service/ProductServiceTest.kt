@@ -32,8 +32,8 @@ internal class ProductServiceTest : BehaviorSpec() {
 
             `when`("상품 리스트가 존재하거나 존재하지 않는다면") {
                 val product: MutableList<Product> = ArrayList()
-                product.add(Product(1, "ABCDE-001", "user@gmail.com", "book", 25000, 100, LocalDateTime.now(), null))
-                product.add(Product(2, "ABCDE-002", "user@gmail.com", "phone", 100000, 100, LocalDateTime.now(), null))
+                product.add(Product("ABCDE-001", "user@gmail.com", "book", 25000, 100, LocalDateTime.now(), null, 1))
+                product.add(Product("ABCDE-002", "user@gmail.com", "phone", 100000, 100, LocalDateTime.now(), null, 2))
 
                 every { productAdapter.findAll() } answers { product }
 
